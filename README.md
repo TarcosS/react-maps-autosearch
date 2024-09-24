@@ -91,7 +91,7 @@ This component is an ideal solution for developers building map-based applicatio
 [MIT][license] © [TarcosS][author]
 
 
-[license]: license
+[license]: LICENSE
 
 [author]: https://ustech.studio/
 
