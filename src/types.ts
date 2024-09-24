@@ -29,6 +29,7 @@ export type MapSearchInputProps = {
         mapWrapper?: React.CSSProperties
     }
     enablePreview?: boolean
+    enablePreviewRelative?: boolean
 }
 
 export type MapProps = {

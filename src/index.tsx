@@ -6,11 +6,6 @@ import { APIProvider } from "@vis.gl/react-google-maps";
 import Map from "./components/Map";
 import { motion } from "framer-motion";
 
-const mapVariants = {
-  open: { opacity: 1, x: 0, zIndex: 100 },
-  closed: { opacity: 0, y: "10px", zIndex: -100 },
-};
-
 const listVariants = {
   open: { opacity: 1, x: 0, zIndex: 100 },
   closed: { opacity: 0, y: "-10px", zIndex: -100 },
@@ -27,7 +22,14 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
   style,
   styles,
   enablePreview = true,
+  enablePreviewRelative = false,
 }) => {
+  const mapVariants = {
+    open: { opacity: 1, x: 0, zIndex: 100 },
+    closed: enablePreviewRelative
+      ? { opacity: 0, y: "10px", zIndex: 0, height: 0, display: "none" }
+      : { opacity: 0, y: "10px", zIndex: 0 },
+  };
   const [text, setText] = useState<string>("");
   const [places, setPlaces] = useState<Place[]>([]);
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
@@ -96,10 +98,22 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
       {enablePreview && (
         <motion.div
           animate={
-            isFocus || isHover ? (selectedPlace ? "open" : "closed") : "closed"
+            enablePreviewRelative
+              ? selectedPlace
+                ? "open"
+                : "closed"
+              : isFocus || isHover
+              ? selectedPlace
+                ? "open"
+                : "closed"
+              : "closed"
           }
           variants={mapVariants}
-          className={"map-search-map " + classNames?.mapWrapper}
+          className={
+            "map-search-map " +
+            classNames?.mapWrapper +
+            (enablePreviewRelative ? " relative" : "")
+          }
           style={styles?.mapWrapper}
         >
           <APIProvider apiKey={ApiKey}>
