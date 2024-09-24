@@ -10,7 +10,7 @@
 # MapSearchInput
 `MapSearchInput` is a React component that enables automatic location searches using Google Maps. It allows users to search for and select a specific location effortlessly.
 
-<img src=(gif) alt="MapSearchInput" width="120" />
+<img src="https://github.com/TarcosS/react-maps-autosearch/blob/main/src/assets/gif.gif" alt="MapSearchInput" width="120" />
 
 ## Installation
 To use this component, first install it via npm:
@@ -117,5 +117,3 @@ This component is an ideal solution for developers building map-based applicatio
 [backers-badge]: https://opencollective.com/unified/backers/badge.svg
 
 [collective]: https://opencollective.com/unified
-
-[gif]: https://github.com/TarcosS/react-maps-autosearch/blob/main/src/assets/gif.gif
