@@ -77,6 +77,8 @@ The [`MapSearchInput`]() component accepts the following props:
   - `input`: Styles for the search input.
   - `list`: Styles for the results list.
   - `item`: Styles for each result item.
+- **enablePreview** (boolean, optional): If you want to change visibility of [Map Preview]() make it false.
+- **enablePreviewRelative** (boolean, optional): Position; relative or absolute for true or false.
 
 ## Why Use It?
 The [`MapSearchInput`]() component streamlines the process of searching for locations on Google Maps, enhancing user experience by offering the following features:
