@@ -100,9 +100,9 @@ This component is an ideal solution for developers building map-based applicatio
 
 [author]: https://ustech.studio/
 
-[build-badge]: https://github.com/TarcosS/react-maps-autosearch/workflows/main/badge.svg
+[build-badge]: https://github.com/TarcosS/react-maps-autosearch/actions/workflows/npm-publish.yml/badge.svg
 
-[build]: https://github.com/TarcosS/react-maps-autosearch/actions
+[build]: https://github.com/TarcosS/react-maps-autosearch/actions/workflows/npm-publish.yml
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/TarcosS/react-maps-autosearch.svg
 
