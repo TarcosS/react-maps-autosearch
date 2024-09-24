@@ -14,7 +14,7 @@
 To use this component, first install it via npm:
 
 ```sh
-npm install react-map-autosearch
+npm install react-maps-autosearch
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ Follow the steps below to integrate the [`MapSearchInput`]() component into your
 
 ```javascript
 import React from 'react';
-import MapSearchInput from 'react-map-autosearch';
+import MapSearchInput from 'react-maps-autosearch';
 
 const App = () => {
   const handlePlaceChange = (place) => {
