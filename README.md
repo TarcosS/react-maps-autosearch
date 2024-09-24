@@ -96,21 +96,25 @@ This component is an ideal solution for developers building map-based applicatio
 [MIT][license] © [TarcosS][author]
 
 
-[build-badge]: https://github.com/TarcosS/react-map-autosearch/workflows/main/badge.svg
+[license]: license
 
-[build]: https://github.com/TarcosS/react-map-autosearch/actions
+[author]: https://ustech.studio/
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/remarkjs/react-map-autosearch.svg
+[build-badge]: https://github.com/TarcosS/react-maps-autosearch/workflows/main/badge.svg
 
-[coverage]: https://codecov.io/github/remarkjs/react-map-autosearch
+[build]: https://github.com/TarcosS/react-maps-autosearch/actions
 
-[downloads-badge]: https://img.shields.io/npm/dm/react-map-autosearch.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/TarcosS/react-maps-autosearch.svg
 
-[downloads]: https://www.npmjs.com/package/react-map-autosearch
+[coverage]: https://codecov.io/github/TarcosS/react-maps-autosearch
 
-[size-badge]: https://img.shields.io/bundlejs/size/react-map-autosearch
+[downloads-badge]: https://img.shields.io/npm/dm/react-maps-autosearch.svg
 
-[size]: https://bundlejs.com/?q=react-map-autosearch
+[downloads]: https://www.npmjs.com/package/react-maps-autosearch
+
+[size-badge]: https://img.shields.io/bundlejs/size/react-maps-autosearch
+
+[size]: https://bundlejs.com/?q=react-maps-autosearch
 
 [sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
