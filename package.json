@@ -1,0 +1,60 @@
+{
+  "name": "react-map-autosearch",
+  "version": "1.0.1",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "babel src --out-dir dist --copy-files",
+    "prepublishOnly": "npm run build",
+    "test": "jest",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write src"
+  },
+  "keywords": [
+    "react",
+    "map",
+    "auto-search",
+    "google-maps",
+    "framer-motion",
+    "typescript",
+    "component"
+  ],
+  "author": "TarcosS",
+  "license": "ISC",
+  "description": "A React component for auto-searching locations on Google Maps.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/react-map-autosearch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/react-map-autosearch/issues"
+  },
+  "homepage": "https://github.com/yourusername/react-map-autosearch#readme",
+  "dependencies": {
+    "@vis.gl/react-google-maps": "^1.2.0",
+    "framer-motion": "^11.5.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.0",
+    "@babel/preset-env": "^7.13.0",
+    "@babel/preset-react": "^7.13.0",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/react": "^18.3.8",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.6.2",
+    "jest": "^27.0.6",
+    "eslint": "^7.32.0",
+    "prettier": "^2.3.2"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  }
+}
