@@ -1,11 +1,8 @@
 
 # react-map-autosearch
 [![Build][build-badge]][build]
-[![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
-[![Sponsors][sponsors-badge]][collective]
-[![Backers][backers-badge]][collective]
 
 # MapSearchInput
 `MapSearchInput` is a React component that enables automatic location searches using Google Maps. It allows users to search for and select a specific location effortlessly.
@@ -18,7 +15,7 @@
 To use this component, first install it via npm:
 
 ```sh
-npm install react-maps-autosearch
+npm install react-map-autosearch
 ```
 
 ## Usage
@@ -26,7 +23,7 @@ Follow the steps below to integrate the [`MapSearchInput`]() component into your
 
 ```javascript
 import React from 'react';
-import MapSearchInput from 'react-maps-autosearch';
+import MapSearchInput from 'react-map-autosearch';
 
 const App = () => {
   const handlePlaceChange = (place) => {
@@ -102,20 +99,10 @@ This component is an ideal solution for developers building map-based applicatio
 
 [build]: https://github.com/TarcosS/react-maps-autosearch/actions/workflows/npm-publish.yml
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/TarcosS/react-maps-autosearch.svg
+[downloads-badge]: https://img.shields.io/npm/dm/react-map-autosearch.svg
 
-[coverage]: https://codecov.io/github/TarcosS/react-maps-autosearch
+[downloads]: https://www.npmjs.com/package/react-map-autosearch
 
-[downloads-badge]: https://img.shields.io/npm/dm/react-maps-autosearch.svg
+[size-badge]: https://img.shields.io/bundlejs/size/react-map-autosearch
 
-[downloads]: https://www.npmjs.com/package/react-maps-autosearch
-
-[size-badge]: https://img.shields.io/bundlejs/size/react-maps-autosearch
-
-[size]: https://bundlejs.com/?q=react-maps-autosearch
-
-[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
-
-[backers-badge]: https://opencollective.com/unified/backers/badge.svg
-
-[collective]: https://opencollective.com/unified
+[size]: https://bundlejs.com/?q=react-map-autosearch
