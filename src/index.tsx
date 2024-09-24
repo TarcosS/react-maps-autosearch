@@ -92,23 +92,23 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
         setIsHover(true);
       }}
     >
-      <motion.div
-        animate={
-          isFocus || isHover ? (selectedPlace ? "open" : "closed") : "closed"
-        }
-        variants={mapVariants}
-        className={"map-search-map " + classNames?.mapWrapper}
-        style={styles?.mapWrapper}
-      >
-        <APIProvider apiKey={ApiKey}>
-          <Map
-            center={{
-              lat: selectedPlace?.lat || 0,
-              lng: selectedPlace?.lng || 0,
-            }}
-          />
-        </APIProvider>
-      </motion.div>
+       <motion.div
+          animate={
+            isFocus || isHover ? (selectedPlace ? "open" : "closed") : "closed"
+          }
+          variants={mapVariants}
+          className={"map-search-map " + classNames?.mapWrapper}
+          style={styles?.mapWrapper}
+        >
+          <APIProvider apiKey={ApiKey}>
+            <Map
+              center={{
+                lat: selectedPlace?.lat || 0,
+                lng: selectedPlace?.lng || 0,
+              }}
+            />
+          </APIProvider>
+        </motion.div>
       <input
         ref={inputRef}
         onFocus={() => {
@@ -158,7 +158,8 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
               }}
             >
               <UilMapMarker
-                style={{ flex: "none", position: "relative", top: 3 }}
+                style={{ flex: "none", position: "relative" }}
+                width={16}
               />
               <div className="map-search-list-item-title">{place.name}</div>
             </div>
