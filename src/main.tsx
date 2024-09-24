@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')!).render(
         alignItems: 'center',
     }}>
         <MapSearchInput
-            ApiKey='AIzaSyBGyQ7dFh1trIFie56vqCvJaFyTbpTzvvA'
+            ApiKey={(import.meta as any).env.VITE_GOOGLE_MAPS_API_KEY}
             style={{
                 width: 300
             }}

@@ -26,6 +26,7 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
   classNames,
   style,
   styles,
+  enablePreview = true,
 }) => {
   const [text, setText] = useState<string>("");
   const [places, setPlaces] = useState<Place[]>([]);
@@ -92,7 +93,8 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
         setIsHover(true);
       }}
     >
-       <motion.div
+      {enablePreview && (
+        <motion.div
           animate={
             isFocus || isHover ? (selectedPlace ? "open" : "closed") : "closed"
           }
@@ -109,6 +111,7 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
             />
           </APIProvider>
         </motion.div>
+      )}
       <input
         ref={inputRef}
         onFocus={() => {

@@ -28,6 +28,7 @@ export type MapSearchInputProps = {
         listItemActive?: React.CSSProperties,
         mapWrapper?: React.CSSProperties
     }
+    enablePreview?: boolean
 }
 
 export type MapProps = {
