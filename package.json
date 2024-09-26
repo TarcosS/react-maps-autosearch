@@ -1,6 +1,6 @@
 {
   "name": "react-map-autosearch",
-  "version": "1.1.4",
+  "version": "1.1.42",
   "main": "dist/index.js",
   "scripts": {
     "build": "yarn clean && tsc && yarn copy-files",
@@ -27,17 +27,17 @@
   "description": "A React component for auto-searching locations on Google Maps.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/react-map-autosearch.git"
+    "url": "https://github.com/TarcosS/react-maps-autosearch.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/react-map-autosearch/issues"
+    "url": "https://github.com/TarcosS/react-maps-autosearch/issues"
   },
-  "homepage": "https://github.com/yourusername/react-map-autosearch#readme",
+  "homepage": "https://github.com/TarcosS/react-maps-autosearch#readme",
   "dependencies": {
     "@vis.gl/react-google-maps": "^1.2.0",
     "framer-motion": "^11.5.6",
     "react": "^18.3.0",
-    "react-dom": "^18.3.0"
+    "react-dom": "^18.3.0",
   },
   "devDependencies": {
     "@babel/cli": "^7.25.6",

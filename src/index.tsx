@@ -57,7 +57,6 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
         }),
       }
     );
-    setPending(false);
     const data = await response.json();
     setPlaces(
       data.places.map((place: any) => ({
@@ -67,6 +66,7 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
         lng: place.location.longitude,
       }))
     );
+    setPending(false);
   };
 
   useEffect(() => {

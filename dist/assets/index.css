@@ -1,6 +1,14 @@
+.relative {
+    position: relative !important;
+}
+
 .map-search-wrapper {
     position: relative;
     width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 12px
 }
 
 .map-search-input {

@@ -40,22 +40,24 @@ import UilMapMarker from "./assets/svg/Marker";
 import { APIProvider } from "@vis.gl/react-google-maps";
 import Map from "./components/Map";
 import { motion } from "framer-motion";
-var mapVariants = {
-    open: { opacity: 1, x: 0, zIndex: 100 },
-    closed: { opacity: 0, y: "10px", zIndex: -100 },
-};
 var listVariants = {
     open: { opacity: 1, x: 0, zIndex: 100 },
     closed: { opacity: 0, y: "-10px", zIndex: -100 },
 };
 var MapSearchInput = function (_a) {
-    var ApiKey = _a.ApiKey, _b = _a.placeholder, placeholder = _b === void 0 ? "Search..." : _b, onChange = _a.onChange, loader = _a.loader, _c = _a.searchSize, searchSize = _c === void 0 ? 10 : _c, className = _a.className, classNames = _a.classNames, style = _a.style, styles = _a.styles;
-    var _d = useState(""), text = _d[0], setText = _d[1];
-    var _e = useState([]), places = _e[0], setPlaces = _e[1];
-    var _f = useState(null), selectedPlace = _f[0], setSelectedPlace = _f[1];
-    var _g = useState(false), isPending = _g[0], setPending = _g[1];
-    var _h = useState(false), isFocus = _h[0], setIsFocus = _h[1];
-    var _j = useState(false), isHover = _j[0], setIsHover = _j[1];
+    var ApiKey = _a.ApiKey, _b = _a.placeholder, placeholder = _b === void 0 ? "Search..." : _b, onChange = _a.onChange, loader = _a.loader, _c = _a.searchSize, searchSize = _c === void 0 ? 10 : _c, className = _a.className, classNames = _a.classNames, style = _a.style, styles = _a.styles, _d = _a.enablePreview, enablePreview = _d === void 0 ? true : _d, _e = _a.enablePreviewRelative, enablePreviewRelative = _e === void 0 ? false : _e;
+    var mapVariants = {
+        open: { opacity: 1, x: 0, zIndex: 100 },
+        closed: enablePreviewRelative
+            ? { opacity: 0, y: "10px", zIndex: 0, height: 0, display: "none" }
+            : { opacity: 0, y: "10px", zIndex: 0 },
+    };
+    var _f = useState(""), text = _f[0], setText = _f[1];
+    var _g = useState([]), places = _g[0], setPlaces = _g[1];
+    var _h = useState(null), selectedPlace = _h[0], setSelectedPlace = _h[1];
+    var _j = useState(false), isPending = _j[0], setPending = _j[1];
+    var _k = useState(false), isFocus = _k[0], setIsFocus = _k[1];
+    var _l = useState(false), isHover = _l[0], setIsHover = _l[1];
     var inputRef = useRef(null);
     var updatePlaces = function (string) { return __awaiter(void 0, void 0, void 0, function () {
         var response, data;
@@ -110,12 +112,22 @@ var MapSearchInput = function (_a) {
         }, onMouseEnter: function () {
             setIsHover(true);
         } },
-        React.createElement(motion.div, { animate: isFocus || isHover ? (selectedPlace ? "open" : "closed") : "closed", variants: mapVariants, className: "map-search-map " + (classNames === null || classNames === void 0 ? void 0 : classNames.mapWrapper), style: styles === null || styles === void 0 ? void 0 : styles.mapWrapper },
+        enablePreview && (React.createElement(motion.div, { animate: enablePreviewRelative
+                ? selectedPlace
+                    ? "open"
+                    : "closed"
+                : isFocus || isHover
+                    ? selectedPlace
+                        ? "open"
+                        : "closed"
+                    : "closed", variants: mapVariants, className: "map-search-map " +
+                (classNames === null || classNames === void 0 ? void 0 : classNames.mapWrapper) +
+                (enablePreviewRelative ? " relative" : ""), style: styles === null || styles === void 0 ? void 0 : styles.mapWrapper },
             React.createElement(APIProvider, { apiKey: ApiKey },
                 React.createElement(Map, { center: {
                         lat: (selectedPlace === null || selectedPlace === void 0 ? void 0 : selectedPlace.lat) || 0,
                         lng: (selectedPlace === null || selectedPlace === void 0 ? void 0 : selectedPlace.lng) || 0,
-                    } }))),
+                    } })))),
         React.createElement("input", { ref: inputRef, onFocus: function () {
                 setIsFocus(true);
             }, onBlur: function () {
@@ -140,7 +152,7 @@ var MapSearchInput = function (_a) {
                         alignItems: "flex-start",
                         gap: 4,
                     } },
-                    React.createElement(UilMapMarker, { style: { flex: "none", position: "relative", top: 3 } }),
+                    React.createElement(UilMapMarker, { style: { flex: "none", position: "relative" }, width: 16 }),
                     React.createElement("div", { className: "map-search-list-item-title" }, place.name)),
                 React.createElement("div", { className: "map-search-list-item-subtitle" }, place.formattedName))); }))));
 };

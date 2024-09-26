@@ -26,6 +26,8 @@ export type MapSearchInputProps = {
         listItemActive?: React.CSSProperties;
         mapWrapper?: React.CSSProperties;
     };
+    enablePreview?: boolean;
+    enablePreviewRelative?: boolean;
 };
 export type MapProps = {
     center: google.maps.LatLngLiteral;
