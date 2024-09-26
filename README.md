@@ -33,32 +33,52 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Google Maps Auto Search</h1>
-      <MapSearchInput
-        ApiKey="YOUR_GOOGLE_MAPS_API_KEY"
-        placeholder="Search for a location"
-        onChange={handlePlaceChange}
-        loader={<div>Loading...</div>}
-        searchSize={10}
-        className="map-search-input"
-        classNames={{
-          input: 'input-class',
-          list: 'list-class',
-          item: 'item-class',
-        }}
-        style={{ width: '100%' }}
-        styles={{
-          input: { padding: '10px' },
-          list: { backgroundColor: 'white' },
-          item: { padding: '5px' },
-        }}
-      />
-    </div>
+    <MapSearchInput
+      ApiKey="YOUR_GOOGLE_MAPS_API_KEY"
+      placeholder="Search for a location"
+      onChange={handlePlaceChange}
+      loader={<div>Loading...</div>}
+      searchSize={10}
+      className="map-search-input"
+      classNames={{
+        input: 'input-class',
+        list: 'list-class',
+        item: 'item-class',
+      }}
+      style={{ width: '100%' }}
+      styles={{
+        input: { padding: '10px' },
+        list: { backgroundColor: 'white' },
+        item: { padding: '5px' },
+      }}
+    />
   );
 };
 
 export default App;
+```
+
+### Exciting Update: Easily Switch Between Free Map Providers in React Map Autosearch!
+
+You can now switch between a selection of free map providers within your React Map Autosearch setup.
+
+
+```bash
+  GOOGLE_PROVIDER = 'https://mts1.google.com/vt/x={x}&y={y}&z={z}'
+  OPEN_STREET_MAP_PROVIDER = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  STADIA_PROVIDER = "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+```
+
+Enjoy the flexibility of choosing the map provider that best fits your needs—whether it's Google Maps, OpenStreetMap, or Stadia Maps!
+
+### Exciting Update 2: Seamlessly Switch Between Place Searchers in Our System!
+
+Now you can easily switch between different place search providers in our system. Choose from paid or free place APIs, enter your API key, and start using it right away!
+
+```bash
+  GOOGLE_NEW_PLACES_SEARCHER
+  GOOGLE_OLD_PLACES_SEARCHER -> SOON
+  OPEN_STREET_MAP_SEARCHER -> Nominatim
 ```
 
 ## Props
@@ -81,6 +101,8 @@ The [`MapSearchInput`]() component accepts the following props:
   - `item`: Styles for each result item.
 - **enablePreview** (boolean, optional): If you want to change visibility of [Map Preview]() make it false.
 - **enablePreviewRelative** (boolean, optional): Position; relative or absolute for true or false.
+- provider: Map Preview provider. Default OPEN_STREET_MAP_PROVIDER
+- searcher: Place searcher. Default OPEN_STREET_MAP_SEARCH
 
 ## Why Use It?
 The [`MapSearchInput`]() component streamlines the process of searching for locations on Google Maps, enhancing user experience by offering the following features:
