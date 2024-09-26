@@ -29,9 +29,16 @@ export type MapSearchInputProps = {
         mapWrapper?: React.CSSProperties
     }
     enablePreview?: boolean
-    enablePreviewRelative?: boolean
+    enablePreviewRelative?: boolean,
+    provider?: ProviderType
 }
 
 export type MapProps = {
     center: google.maps.LatLngLiteral,
+}
+
+export type ProviderType = {
+    url: string
+    needKey: boolean
+    attribution: string
 }

@@ -1,13 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { MapSearchInputProps, Place } from "./types";
-import "./assets/index.css";
-import UilMapMarker from "./assets/svg/Marker";
-import { APIProvider } from "@vis.gl/react-google-maps";
-import Map from "./components/Map";
+import { MapContainer } from "react-leaflet";
 import { motion } from "framer-motion";
-import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvent } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+
+import { MapSearchInputProps, Place } from "./types";
+
 import OSM from "./components/OSM";
+
+import UilMapMarker from "./assets/svg/Marker";
+
+import { GOOGLE_PROVIDER } from "./providers";
+
+import "./assets/index.css";
+import "leaflet/dist/leaflet.css";
+
 
 const listVariants = {
   open: { opacity: 1, x: 0, zIndex: 100 },
@@ -26,6 +31,7 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
   styles,
   enablePreview = true,
   enablePreviewRelative = false,
+  provider = GOOGLE_PROVIDER,
 }) => {
   const mapVariants = {
     open: { opacity: 1, x: 0, zIndex: 100 },
@@ -41,6 +47,10 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
   const [isHover, setIsHover] = useState<boolean>(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  if (provider.needKey && !ApiKey) {
+    throw new Error("API Key is required for this provider");
+  }
 
   const updatePlaces = async (string: string) => {
     setPending(true);
@@ -107,32 +117,19 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
           }
           style={styles?.mapWrapper}
         >
-          {ApiKey ? (
-            <APIProvider apiKey={ApiKey}>
-              <Map
-                center={{
-                  lat: selectedPlace?.lat || 0,
-                  lng: selectedPlace?.lng || 0,
-                }}
-              />
-            </APIProvider>
-          ) : (
-            <MapContainer
-              center={[selectedPlace?.lat || 0, selectedPlace?.lng || 0]}
-              zoom={3}
-              scrollWheelZoom={false}
-              zoomControl={false}
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: "8px",
-              }}
-            >
-              <OSM
-                selectedPlace={selectedPlace}
-              />
-            </MapContainer>
-          )}
+          <MapContainer
+            center={[selectedPlace?.lat || 0, selectedPlace?.lng || 0]}
+            zoom={3}
+            scrollWheelZoom={false}
+            zoomControl={false}
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "8px",
+            }}
+          >
+            <OSM selectedPlace={selectedPlace} provider={provider} />
+          </MapContainer>
         </motion.div>
       )}
       <input
