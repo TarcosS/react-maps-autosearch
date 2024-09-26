@@ -30,7 +30,8 @@ export type MapSearchInputProps = {
     }
     enablePreview?: boolean
     enablePreviewRelative?: boolean,
-    provider?: ProviderType
+    provider?: ProviderType,
+    searcher?: SearcherType
 }
 
 export type MapProps = {
@@ -41,4 +42,9 @@ export type ProviderType = {
     url: string
     needKey: boolean
     attribution: string
+}
+
+export type SearcherType = {
+    name: string
+    search: (text: string, searchSize: number, ApiKey?: string) => Promise<Place[]>
 }

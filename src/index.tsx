@@ -8,11 +8,11 @@ import OSM from "./components/OSM";
 
 import UilMapMarker from "./assets/svg/Marker";
 
-import { GOOGLE_PROVIDER } from "./providers";
+import { GOOGLE_PROVIDER, OPEN_STREET_MAP_PROVIDER } from "./providers";
 
 import "./assets/index.css";
 import "leaflet/dist/leaflet.css";
-
+import { OPEN_STREET_MAP_SEARCHER } from "./searchers";
 
 const listVariants = {
   open: { opacity: 1, x: 0, zIndex: 100 },
@@ -31,7 +31,8 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
   styles,
   enablePreview = true,
   enablePreviewRelative = false,
-  provider = GOOGLE_PROVIDER,
+  provider = OPEN_STREET_MAP_PROVIDER,
+  searcher = OPEN_STREET_MAP_SEARCHER,
 }) => {
   const mapVariants = {
     open: { opacity: 1, x: 0, zIndex: 100 },
@@ -54,19 +55,9 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
 
   const updatePlaces = async (string: string) => {
     setPending(true);
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?amenity=${string}&format=json&limit=${searchSize}`
-    );
+    const response = await searcher.search(string, searchSize, ApiKey);
 
-    const data = await response.json();
-    setPlaces(
-      data.map((place: any) => ({
-        name: place.name,
-        formattedName: place.display_name,
-        lat: Number(place.lat),
-        lng: Number(place.lon),
-      }))
-    );
+    setPlaces(response);
     setPending(false);
   };
 
