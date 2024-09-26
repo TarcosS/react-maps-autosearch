@@ -6,7 +6,7 @@ export type Place = {
 }
 
 export type MapSearchInputProps = {
-    ApiKey: string
+    ApiKey?: string
     placeholder?: string
     onChange?: (place: Place | null) => void
     loader?: React.ReactNode

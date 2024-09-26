@@ -23,10 +23,11 @@ createRoot(document.getElementById("root")!).render(
       >
         <input type="text" className={"map-search-input"} placeholder="Hello!"/>
         <MapSearchInput
-          ApiKey={(import.meta as any).env.VITE_GOOGLE_MAPS_API_KEY}
+          // ApiKey={(import.meta as any).env.VITE_GOOGLE_MAPS_API_KEY}
           style={{
             width: 300,
           }}
+          enablePreviewRelative
         />
         <input type="text" className={"map-search-input"} placeholder="Thanks for Contributing!"/>
       </div>

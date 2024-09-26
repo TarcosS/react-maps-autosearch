@@ -5,6 +5,9 @@ import UilMapMarker from "./assets/svg/Marker";
 import { APIProvider } from "@vis.gl/react-google-maps";
 import Map from "./components/Map";
 import { motion } from "framer-motion";
+import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvent } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import OSM from "./components/OSM";
 
 const listVariants = {
   open: { opacity: 1, x: 0, zIndex: 100 },
@@ -42,28 +45,16 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
   const updatePlaces = async (string: string) => {
     setPending(true);
     const response = await fetch(
-      "https://places.googleapis.com/v1/places:searchText",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Goog-Api-Key": ApiKey,
-          "X-Goog-FieldMask":
-            "places.displayName,places.formattedAddress,places.location",
-        },
-        body: JSON.stringify({
-          textQuery: string,
-          pageSize: searchSize,
-        }),
-      }
+      `https://nominatim.openstreetmap.org/search?amenity=${string}&format=json&limit=${searchSize}`
     );
+
     const data = await response.json();
     setPlaces(
-      data.places.map((place: any) => ({
-        name: place.displayName.text,
-        formattedName: place.formattedAddress,
-        lat: place.location.latitude,
-        lng: place.location.longitude,
+      data.map((place: any) => ({
+        name: place.name,
+        formattedName: place.display_name,
+        lat: Number(place.lat),
+        lng: Number(place.lon),
       }))
     );
     setPending(false);
@@ -116,14 +107,32 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
           }
           style={styles?.mapWrapper}
         >
-          <APIProvider apiKey={ApiKey}>
-            <Map
-              center={{
-                lat: selectedPlace?.lat || 0,
-                lng: selectedPlace?.lng || 0,
+          {ApiKey ? (
+            <APIProvider apiKey={ApiKey}>
+              <Map
+                center={{
+                  lat: selectedPlace?.lat || 0,
+                  lng: selectedPlace?.lng || 0,
+                }}
+              />
+            </APIProvider>
+          ) : (
+            <MapContainer
+              center={[selectedPlace?.lat || 0, selectedPlace?.lng || 0]}
+              zoom={3}
+              scrollWheelZoom={false}
+              zoomControl={false}
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "8px",
               }}
-            />
-          </APIProvider>
+            >
+              <OSM
+                selectedPlace={selectedPlace}
+              />
+            </MapContainer>
+          )}
         </motion.div>
       )}
       <input
