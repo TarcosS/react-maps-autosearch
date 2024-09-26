@@ -79,7 +79,6 @@ var MapSearchInput = function (_a) {
                         })];
                 case 1:
                     response = _a.sent();
-                    setPending(false);
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = _a.sent();
@@ -89,6 +88,7 @@ var MapSearchInput = function (_a) {
                         lat: place.location.latitude,
                         lng: place.location.longitude,
                     }); }));
+                    setPending(false);
                     return [2 /*return*/];
             }
         });
