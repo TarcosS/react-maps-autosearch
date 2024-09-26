@@ -4,6 +4,8 @@
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
+<a href="https://www.buymeacoffee.com/kokkiliculL"><img height="42px" src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=kokkiliculL&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
+
 # MapSearchInput
 `MapSearchInput` is a React component that enables automatic location searches using Google Maps. It allows users to search for and select a specific location effortlessly.
 
