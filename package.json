@@ -1,6 +1,6 @@
 {
   "name": "react-map-autosearch",
-  "version": "1.1.43",
+  "version": "1.2.0",
   "main": "dist/index.js",
   "scripts": {
     "build": "yarn clean && tsc && yarn copy-files",
