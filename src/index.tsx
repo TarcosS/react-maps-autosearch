@@ -8,11 +8,13 @@ import OSM from "./components/OSM";
 
 import UilMapMarker from "./assets/svg/Marker";
 
-import { GOOGLE_PROVIDER, OPEN_STREET_MAP_PROVIDER } from "./providers";
+import { OPEN_STREET_MAP_PROVIDER } from "./providers";
 
-import "./assets/index.css";
 import "leaflet/dist/leaflet.css";
+import "./assets/index.css";
+
 import { OPEN_STREET_MAP_SEARCHER } from "./searchers";
+import useDebounce from "./hooks/useDebounce";
 
 const listVariants = {
   open: { opacity: 1, x: 0, zIndex: 100 },
@@ -41,6 +43,7 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
       : { opacity: 0, y: "10px", zIndex: 0 },
   };
   const [text, setText] = useState<string>("");
+  const debouncedText = useDebounce(text, 300);
   const [places, setPlaces] = useState<Place[]>([]);
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const [isPending, setPending] = useState<boolean>(false);
@@ -68,13 +71,13 @@ const MapSearchInput: React.FC<MapSearchInputProps> = ({
   }, [selectedPlace, onChange]);
 
   useEffect(() => {
-    if (text.length > 0) {
-      updatePlaces(text);
+    if (debouncedText.length > 0) {
+      updatePlaces(debouncedText);
     } else {
       setPlaces([]);
       setSelectedPlace(null);
     }
-  }, [text]);
+  }, [debouncedText]);
 
   return (
     <div
