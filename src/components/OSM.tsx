@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import { Place, ProviderType } from "src/types";
+import LeafletAttribution from "./LeafletAttribution";
 
 const OSM: React.FC<{ selectedPlace: Place | null; provider: ProviderType }> = ({
   selectedPlace,
@@ -23,6 +24,7 @@ const OSM: React.FC<{ selectedPlace: Place | null; provider: ProviderType }> = (
           {selectedPlace?.formattedName}
         </Popup>
       </Marker>
+      <LeafletAttribution attribution={provider.attribution} />
     </>
   );
 };
