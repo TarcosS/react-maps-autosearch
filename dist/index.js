@@ -35,59 +35,48 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import React, { useEffect, useRef, useState } from "react";
-import "./assets/index.css";
-import UilMapMarker from "./assets/svg/Marker";
-import { APIProvider } from "@vis.gl/react-google-maps";
-import Map from "./components/Map";
+import { MapContainer } from "react-leaflet";
 import { motion } from "framer-motion";
+import OSM from "./components/OSM";
+import UilMapMarker from "./assets/svg/Marker";
+import { OPEN_STREET_MAP_PROVIDER } from "./providers";
+import "leaflet/dist/leaflet.css";
+import "./assets/index.css";
+import { OPEN_STREET_MAP_SEARCHER } from "./searchers";
+import useDebounce from "./hooks/useDebounce";
 var listVariants = {
     open: { opacity: 1, x: 0, zIndex: 100 },
     closed: { opacity: 0, y: "-10px", zIndex: -100 },
 };
 var MapSearchInput = function (_a) {
-    var ApiKey = _a.ApiKey, _b = _a.placeholder, placeholder = _b === void 0 ? "Search..." : _b, onChange = _a.onChange, loader = _a.loader, _c = _a.searchSize, searchSize = _c === void 0 ? 10 : _c, className = _a.className, classNames = _a.classNames, style = _a.style, styles = _a.styles, _d = _a.enablePreview, enablePreview = _d === void 0 ? true : _d, _e = _a.enablePreviewRelative, enablePreviewRelative = _e === void 0 ? false : _e;
+    var ApiKey = _a.ApiKey, _b = _a.placeholder, placeholder = _b === void 0 ? "Search..." : _b, onChange = _a.onChange, loader = _a.loader, _c = _a.searchSize, searchSize = _c === void 0 ? 10 : _c, className = _a.className, classNames = _a.classNames, style = _a.style, styles = _a.styles, _d = _a.enablePreview, enablePreview = _d === void 0 ? true : _d, _e = _a.enablePreviewRelative, enablePreviewRelative = _e === void 0 ? false : _e, _f = _a.provider, provider = _f === void 0 ? OPEN_STREET_MAP_PROVIDER : _f, _g = _a.searcher, searcher = _g === void 0 ? OPEN_STREET_MAP_SEARCHER : _g;
     var mapVariants = {
         open: { opacity: 1, x: 0, zIndex: 100 },
         closed: enablePreviewRelative
             ? { opacity: 0, y: "10px", zIndex: 0, height: 0, display: "none" }
             : { opacity: 0, y: "10px", zIndex: 0 },
     };
-    var _f = useState(""), text = _f[0], setText = _f[1];
-    var _g = useState([]), places = _g[0], setPlaces = _g[1];
-    var _h = useState(null), selectedPlace = _h[0], setSelectedPlace = _h[1];
-    var _j = useState(false), isPending = _j[0], setPending = _j[1];
-    var _k = useState(false), isFocus = _k[0], setIsFocus = _k[1];
-    var _l = useState(false), isHover = _l[0], setIsHover = _l[1];
+    var _h = useState(""), text = _h[0], setText = _h[1];
+    var debouncedText = useDebounce(text, 300);
+    var _j = useState([]), places = _j[0], setPlaces = _j[1];
+    var _k = useState(null), selectedPlace = _k[0], setSelectedPlace = _k[1];
+    var _l = useState(false), isPending = _l[0], setPending = _l[1];
+    var _m = useState(false), isFocus = _m[0], setIsFocus = _m[1];
+    var _o = useState(false), isHover = _o[0], setIsHover = _o[1];
     var inputRef = useRef(null);
+    if (provider.needKey && !ApiKey) {
+        throw new Error("API Key is required for this provider");
+    }
     var updatePlaces = function (string) { return __awaiter(void 0, void 0, void 0, function () {
-        var response, data;
+        var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     setPending(true);
-                    return [4 /*yield*/, fetch("https://places.googleapis.com/v1/places:searchText", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Goog-Api-Key": ApiKey,
-                                "X-Goog-FieldMask": "places.displayName,places.formattedAddress,places.location",
-                            },
-                            body: JSON.stringify({
-                                textQuery: string,
-                                pageSize: searchSize,
-                            }),
-                        })];
+                    return [4 /*yield*/, searcher.search(string, searchSize, ApiKey)];
                 case 1:
                     response = _a.sent();
-                    return [4 /*yield*/, response.json()];
-                case 2:
-                    data = _a.sent();
-                    setPlaces(data.places.map(function (place) { return ({
-                        name: place.displayName.text,
-                        formattedName: place.formattedAddress,
-                        lat: place.location.latitude,
-                        lng: place.location.longitude,
-                    }); }));
+                    setPlaces(response);
                     setPending(false);
                     return [2 /*return*/];
             }
@@ -99,14 +88,14 @@ var MapSearchInput = function (_a) {
         }
     }, [selectedPlace, onChange]);
     useEffect(function () {
-        if (text.length > 0) {
-            updatePlaces(text);
+        if (debouncedText.length > 0) {
+            updatePlaces(debouncedText);
         }
         else {
             setPlaces([]);
             setSelectedPlace(null);
         }
-    }, [text]);
+    }, [debouncedText]);
     return (React.createElement("div", { className: "map-search-wrapper " + className, style: style, onMouseLeave: function () {
             setIsHover(false);
         }, onMouseEnter: function () {
@@ -123,11 +112,12 @@ var MapSearchInput = function (_a) {
                     : "closed", variants: mapVariants, className: "map-search-map " +
                 (classNames === null || classNames === void 0 ? void 0 : classNames.mapWrapper) +
                 (enablePreviewRelative ? " relative" : ""), style: styles === null || styles === void 0 ? void 0 : styles.mapWrapper },
-            React.createElement(APIProvider, { apiKey: ApiKey },
-                React.createElement(Map, { center: {
-                        lat: (selectedPlace === null || selectedPlace === void 0 ? void 0 : selectedPlace.lat) || 0,
-                        lng: (selectedPlace === null || selectedPlace === void 0 ? void 0 : selectedPlace.lng) || 0,
-                    } })))),
+            React.createElement(MapContainer, { center: [(selectedPlace === null || selectedPlace === void 0 ? void 0 : selectedPlace.lat) || 0, (selectedPlace === null || selectedPlace === void 0 ? void 0 : selectedPlace.lng) || 0], zoom: 3, scrollWheelZoom: false, zoomControl: false, style: {
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "8px",
+                } },
+                React.createElement(OSM, { selectedPlace: selectedPlace, provider: provider })))),
         React.createElement("input", { ref: inputRef, onFocus: function () {
                 setIsFocus(true);
             }, onBlur: function () {

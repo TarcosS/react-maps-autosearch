@@ -1,6 +1,6 @@
 {
   "name": "react-map-autosearch",
-  "version": "1.2.0",
+  "version": "1.2.11",
   "main": "dist/index.js",
   "scripts": {
     "build": "yarn clean && tsc && yarn copy-files",
@@ -20,11 +20,17 @@
     "google-maps",
     "framer-motion",
     "typescript",
-    "component"
+    "component",
+    "autocomplete",
+    "autosearch",
+    "openstreetmap",
+    "osm",
+    "nominatim",
+    "stadia"
   ],
   "author": "TarcosS",
-  "license": "ISC",
-  "description": "A React component for auto-searching locations on Google Maps.",
+  "license": "MIT",
+  "description": "A React component for auto-searching | autocomplete locations on Google Maps.",
   "repository": {
     "type": "git",
     "url": "https://github.com/TarcosS/react-maps-autosearch.git"
